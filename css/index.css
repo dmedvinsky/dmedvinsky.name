@@ -396,3 +396,16 @@ body {
     text-align: right;
     font-style: normal;
 }
+
+.back-to-main {
+    height: 3em;
+    overflow: hidden;
+    -webkit-transition: height 1s;
+       -moz-transition: height 1s;
+        -ms-transition: height 1s;
+         -o-transition: height 1s;
+            transition: height 1s;
+}
+.back-to-main:hover {
+    height: 5em;
+}
