@@ -1,0 +1,17 @@
+.tm::after {
+    position: absolute;
+    content: '™';
+}
+
+address.author {
+    margin-top: 3em;
+}
+
+abbr {
+    cursor: help;
+}
+
+h4 img {
+    vertical-align: bottom;
+    border: 0 none !important;
+}

@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Passwords: common mistakes and how to do it</title>
+    <meta name="description" content="About passwords for corporate junkies.">
+    <meta name="author" content="Dmitry Medvinsky">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="../lib/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../lib/reveal.js/css/theme/default.css">
+    <link rel="stylesheet" href="../lib/reveal.js/lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/custom.css">
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+<section>
+  <h1>Working with Passwords</h1>
+  <address class="author vcard">
+    <p class="name">Dmitry Medvinsky</p>
+    <p class="email"><a href="mailto:me@dmedvinsky.name">me@dmedvinsky.name</a></p>
+  </address>
+</section>
+
+<section>
+  <input type="text" placeholder="Login">
+  <br><br>
+  <input type="password" placeholder="Password">
+  <br><br>
+  <button>Log in</button>
+</section>
+
+<section>
+  <h2>Plain text</h2>
+  <pre><code>
+    def check(login, password):
+        user = get_from_db(User, login=login)
+        if <em>user.password == password</em>:
+            return True
+        else:
+            return False
+  </code></pre>
+  <ul>
+    <li>Simple and fast.</li>
+    <li>Very bad.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Crypted text</h2>
+  <pre><code>
+    def check(login, password):
+        user = get_from_db(User, login=login)
+        if <em>decrypt(user.password)</em> == password:
+            return True
+        else:
+            return False
+  </code></pre>
+  <ul>
+    <li>Might be simple and fast.</li>
+    <li>Just as bad.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Cryptographic hash function</h2>
+  <p><img alt="Cryptographic hash function" src="img/cryptohash.png"></p>
+  <ul>
+    <li>MD5</li>
+    <li>SHA-1</li>
+    <li>SHA-256</li>
+    <li>WHIRLPOOL</li>
+    <li>RIPEMD-320</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Cryptographic hash function</h2>
+  <pre><code>
+    def check(login, password):
+        user = get_from_db(User, login=login)
+        if user.password == <em>hash(password)</em>:
+            return True
+        else:
+            return False
+  </code></pre>
+</section>
+
+<section>
+  <img src="img/linkedin.png" alt="LinkedIn passwords leak">
+</section>
+
+<section>
+  <h2>MD5</h2>
+  <img src="img/john-md5.png" alt="MD5 hash cracked by John the Ripper">
+  <h3>0:00.34 elapsed</h3>
+</section>
+
+<section>
+  <h2>Cracking up</h2>
+  <ul>
+    <li>Dictionary</li>
+    <li>Brute Force</li>
+    <li>Lookup Table</li>
+    <li>Reverse Lookup Table</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Salt</h2>
+  <pre><code>
+    def check(login, password):
+        user = get_from_db(User, login=login)
+        if user.password == hash(password<em> + salt</em>):
+            return True
+        else:
+            return False
+  </code></pre>
+</section>
+
+<section>
+  <h2>Salt Nots</h2>
+  <ul>
+    <li>Salt reuse</li>
+    <li>Short salt</li>
+  </ul>
+</section>
+
+<section>
+  <h2>How to</h2>
+  <ul>
+    <li>Long salt.</li>
+    <li>Random salt each time.</li>
+    <li>Strong hash.</li>
+    <li>Key stretching.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Key stretching</h2>
+  <ul>
+    <li>Makes hash calculation slower</li>
+    <li>(hash (hash (hash (hash (hash ... x))))) — not good enough!</li>
+    <li>PBKDF2</li>
+    <li>bcrypt</li>
+    <li>scrypt</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Some more</h2>
+  <pre><code>
+    def check(login, password):
+        user = get_from_db(User, login=login)
+        hash = best_algo(password)
+        if user.password <em>==</em> hash:
+            return True
+        else:
+            return False
+  </code></pre>
+</section>
+
+<section>
+  <h2>Timing attacks</h2>
+  <pre><code>
+    0000000000000000000000000000000000000000
+    0100000000000000000000000000000000000000
+    0200000000000000000000000000000000000000
+    ... 250 ...
+    FD00000000000000000000000000000000000000
+    FE00000000000000000000000000000000000000
+    FF00000000000000000000000000000000000000
+  </code></pre>
+</section>
+
+<section>
+  <h2>Timing attacks</h2>
+  <ul>
+    <li>WAN: 20µs</li>
+    <li>LAN: &lt;100ns</li>
+    <li class="empty"></li>
+    <li>HMAC: 20 bytes</li>
+    <li>256 cases / byte</li>
+    <li>1000 reqs / case</li>
+    <li>5 000 000 reqs total</li>
+    <li>1 week @ 10 req/s</li>
+  </ul>
+</section>
+
+<section>
+  <h1>Thanks</h1>
+</section>
+
+      </div>
+    </div>
+    <script src="../lib/reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="../lib/reveal.js/js/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            loop: false,
+            mouseWheel: false,
+            rollingLinks: false,
+            theme: 'default', // default/neon
+            transition: 'default' // default/cube/page/concave/linear(2d)
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>

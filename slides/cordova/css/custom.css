@@ -1,0 +1,33 @@
+address.author {
+    margin-top: 3em;
+}
+abbr {
+    cursor: help;
+}
+input {
+    font-size: 200%;
+    width: 60%;
+}
+button {
+    font-size: 200%;
+    width: 30%;
+}
+code {
+    font-size: 150%;
+    line-height: 1em;
+}
+code em {
+    text-decoration: underline;
+    font-style: normal !important;
+}
+li.empty {
+    list-style: none;
+    display: block;
+    margin: 1em 0;
+}
+pre .javascript {
+    opacity: 1 !important;
+}
+pre strong {
+    outline: 1px solid red;
+}

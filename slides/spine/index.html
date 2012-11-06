@@ -1,0 +1,306 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Spine for corporate junkies™</title>
+    <meta name="description" content="Something about Spine JavaScript framework" />
+    <meta name="author" content="Dmitry Medvinsky" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="stylesheet" href="../lib/reveal.js/lib/css/zenburn.css">
+  </head>
+
+  <body>
+    <div id="impress">
+      <div id="title" class="step slide centered" data-x="0" data-y="0" data-z="0">
+        <h1>Spine</h1>
+      </div>
+
+      <div id="javascript" class="step slide centered" data-x="0" data-y="120" data-z="-800">
+        <h2><em>Java</em>Script MVC&nbsp;Applications</h2>
+      </div>
+
+      <div id="coffeescript" class="step slide centered" data-x="0" data-y="170" data-z="-800">
+        <h2>Actually, <em>Coffee</em>Script<span class="footnote">*</span></h2>
+        <p class="footnote">both, really</p>
+      </div>
+
+      <div id="egg1" class="step slide centered" data-x="-10000" data-y="-10000" data-z="0">
+        <p>Same eggs, half-faced</p>
+        <img src="img/egg.jpg" alt="Egg">
+      </div>
+      <div id="egg2" class="step slide centered" data-x="-10000" data-y="-10000" data-z="0" data-rotate-y="90">
+        <p>Same eggs, half-faced</p>
+        <img src="img/egg.jpg" alt="Egg">
+      </div>
+
+      <div id="cs_example" class="step slide" data-x="-8000" data-y="-10000" data-z="0">
+        <pre><code class="coffeescript">
+number   = 42
+opposite = true
+
+number = -42 if opposite
+
+square = (x) -&gt; x * x
+
+math =
+  root:   Math.sqrt
+  square: square
+  cube:   (x) -&gt; x * square x
+
+race = (winner, runners...) -&gt;
+  print winner, runners
+
+alert "I knew it!" if elvis?
+
+cubes = (math.cube num for num in list)
+        </code></pre>
+      </div>
+
+      <div id="opinionated" class="step slide centered" data-x="200" data-y="1000" data-z="0" data-scale="1">
+        <h2>Spine is opinionated</h2>
+      </div>
+
+      <div id="coupled" class="step slide" data-x="410" data-y="1100" data-z="-500" data-scale="1">
+        <h2>tightly coupled? — not really</h2>
+        <ul>
+          <li>no UI framework</li>
+          <li>CoffeeScript, JavaScript</li>
+          <li class="con">jQuery, Zepto</li>
+        </ul>
+      </div>
+
+      <div id="opinionated_in" class="step slide" data-x="1200" data-y="1000" data-z="0" data-rotate-z="70" data-scale="1">
+        <h2>Opinionated in</h2>
+        <ul>
+          <li>architecture</li>
+          <li>design</li>
+        </ul>
+        <h2>Encourages</h2>
+        <ul>
+          <li>de-coupled components</li>
+          <li>CommonJS modules</li>
+          <li>asynchronous UI</li>
+        </ul>
+      </div>
+
+      <div id="spine_is" class="step slide" data-x="1200" data-y="100" data-z="400" data-scale="1">
+        <h2>Spine is:</h2>
+        <ul>
+          <li>simple routing</li>
+          <li>lightweight controllers</li>
+          <li>model layer with ORM</li>
+          <li>AJAJ and HTML5 <code>localStorage</code> backends</li>
+        </ul>
+        <ul>
+          <li><code>spine.app</code> — scaffolding</li>
+          <li><code>hem</code> — dependency manager, development server</li>
+        </ul>
+      </div>
+
+      <div id="tree1" class="step slide centered" data-x="2000" data-y="0" data-z="0">
+        <img src="img/tree1.png" alt="">
+      </div>
+
+      <div id="package_json" class="step slide" data-x="3000" data-y="0" data-z="0">
+        <h2>package.json</h2>
+        <pre><code class="json">
+{
+  "name": "app",
+  "version": "0.0.1",
+  "dependencies": {
+    "spine": "~1.0.7",
+    "hem": "~0.1.8",
+    "jqueryify": "~0.0.1",
+  }
+}
+        </code></pre>
+        <p>install software:</p>
+        <pre><code class="bash"><span class="symbol">$</span> <span class="identifier">npm</span> <span class="string">install</span> <span class="string">.</span></code></pre>
+      </div>
+
+      <div id="slug_json" class="step slide" data-x="3000" data-y="600" data-z="0">
+        <h2>slug.json</h2>
+        <pre><code class="json">{
+    "main": "./app/index",
+    "css": "./css/index",
+    "public": "./public",
+    "paths": ["./app"],
+    "libs": ["./lib/cordova.js"],
+    "dependencies": [
+        "spine",
+        "spine/lib/local",
+        "spine/lib/ajax",
+        "spine/lib/route",
+        "spine/lib/manager",
+        "jqueryify",
+        "spine.mobile",
+    ]
+}</code></pre>
+        <p>serve development version:</p>
+        <pre><code class="bash"><span class="symbol">$</span> <span class="identifier">./node_modules/.bin/hem</span> <span class="string">server</span></code></pre>
+        <p>or build for release:</p>
+        <pre><code class="bash"><span class="symbol">$</span> <span class="identifier">./node_modules/.bin/hem</span> <span class="string">build</span></code></pre>
+      </div>
+
+      <div id="index_html" class="step slide" data-x="3000" data-y="1800" data-z="0">
+        <h2>public/index.html</h2>
+        <pre><code class="html">
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;script src="application.js"&gt;&lt;/script&gt;
+    &lt;link rel="stylesheet" href="application.css" /&gt;
+  &lt;/head&gt;
+
+  &lt;body onload="onLoad();"&gt;
+    &lt;div class="universe"&gt;
+      &lt;header class="page_header"&gt;
+        &lt;h1&gt;&lt;img src="images/logo.png" alt="Logo" /&gt;&lt;/h1&gt;
+      &lt;/header&gt;
+
+      &lt;section id="stack_container" class="content_wrapper"&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+      var onLoad = function() {
+        var Stack = require('index');
+        var container = document.getElementById('stack_container');
+        new Stack({el: container});
+      };
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+        </code></pre>
+      </div>
+
+      <div id="tree2" class="step slide centered" data-x="4200" data-y="0" data-z="0">
+        <img src="img/tree2.png" alt="">
+      </div>
+
+      <div id="index_coffee" class="step slide" data-x="4200" data-y="1000" data-z="0">
+        <h2>index.coffee</h2>
+        <pre><code class="coffeescript">require('lib/setup')
+Spine = require('spine')
+User = require('models/user')
+Users = require('controllers/users')
+UserDetails = require('controllers/userdetails')
+
+class MyApp extends Spine.Stack
+  controllers:
+    users       <span class="symbol">:</span> Users
+    userdetails <span class="symbol">:</span> UserDetails
+  routes:
+    '/login'     <span class="symbol">:</span> 'login'
+    '/users'     <span class="symbol">:</span> 'users'
+    '/users/:id' <span class="symbol">:</span> 'userdetails'
+
+  constructor: <span class="symbol">-&gt;</span>
+    super
+    @navigate '/users'
+
+module.exports = MyApp</code></pre>
+      </div>
+
+      <div id="user_details_coffee" class="step slide" data-x="4200" data-y="2000" data-z="0">
+        <h2>controllers/userdetails.coffee</h2>
+        <pre><code class="coffeescript">Spine = require('spine')
+User = require('models/user')
+
+class UserDetails extends Spine.Controller
+  className: 'user-profile'
+  elements:
+    '.js-rating' <span class="symbol">:</span> 'rating'
+  events:
+    'click .js-vote-up'   <span class="symbol">:</span> 'voteUp'
+    'click .js-vote-down' <span class="symbol">:</span> 'voteDown'
+
+  constructor: <span class="symbol">-&gt;</span>
+    super
+    @active @activated
+
+  activated: (params) <span class="symbol">=&gt;</span>
+    @user = User.get(params.id)
+    @user.bind 'update', @updateVote
+    @render()
+
+  updateVote: <span class="symbol">=&gt;</span>
+    @rating.html @user.rating</code></pre>
+        <pre><code class="coffeescript">
+  render: (context) <span class="symbol">=&gt;</span>
+    context <span class="symbol">?=</span> {}
+    context.user <span class="symbol">?=</span> @user
+    @html @template(context)
+
+  template: (context) <span class="symbol">-&gt;</span>
+    require('views/user_profile.html')(context)
+
+  voteUp: (event) <span class="symbol">-&gt;</span>
+    @vote event, +1
+
+  voteDown: (event) <span class="symbol">-&gt;</span>
+    @vote event, -1
+
+  vote: (event, delta) <span class="symbol">=&gt;</span>
+    event.preventDefault()
+    @user.rating <span class="symbol">+=</span> delta
+    @user.save()
+
+module.exports = UserDetails
+        </code></pre>
+      </div>
+
+      <div id="user_coffee" class="step slide" data-x="4200" data-y="2900" data-z="0">
+        <h2>models/user.coffee</h2>
+        <pre><code class="coffeescript">Spine = require('spine')
+Validators = require('validators')
+Errors = require('errors')
+
+class User extends Spine.Model
+  @configure 'User', 'email', 'joined_on'
+
+  @extend Spine.Model.Local
+  @extend Spine.Model.Ajax
+
+  @fromJSON: (data) <span class="symbol">-&gt;</span>
+    data = super(data)
+    data['joined_on'] <span class="symbol">=</span> new Date(data['joined_on'])
+    data
+
+  validate: <span class="symbol">-&gt;</span>
+    errors = {}
+    errors.email <span class="symbol">?=</span> Errors.required unless @email
+    errors.email <span class="symbol">?=</span> Errors.email unless Validators.email @email
+    errors unless Spine.isBlank errors
+
+module.exports = User</code></pre>
+      </div>
+
+<!--
+      <div id="global_events" class="step slide" data-x="6000" data-y="0" data-z="0">
+        <h2>Global events</h2>
+        <pre><code class="coffeescript">
+Spine.bind 'sidebar:show', =&gt;
+  @sidebar.active()
+
+Spine.trigger 'sidebar:show'
+        </code></pre>
+      </div>
+-->
+
+      <div id="thanks" class="step" data-x="2500" data-y="1200" data-z="10000" data-scale="1">
+        <h1>Thanks</h1>
+      </div>
+    </div>
+
+    <script src="../lib/impress.js/js/impress.js"></script>
+    <script src="../lib/reveal.js/plugin/highlight.js/highlight.js"></script>
+    <script>
+      impress().init();
+      hljs.initHighlightingOnLoad();
+    </script>
+  </body>
+</html>
