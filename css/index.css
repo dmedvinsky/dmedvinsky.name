@@ -378,24 +378,65 @@ table {
 
 body {
     font: 100% Quando, Georgia, serif;
+    background: #eee url(../g/gray_jean.png) repeat;
 }
 .universe {
+    background: #fff;
     width: 600px;
-    margin: 1em auto;
+    height: 300px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 1px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -150px 0 0 -300px;
+    padding: 1em;
 }
 
 .about {
     font-size: 120%;
 }
-.about-heading { }
-.about-description {
-    text-align: center;
+.about-heading {
+    text-align: right;
+    margin: 0;
 }
+.about-photo {
+    position: absolute;
+    left: 0.5em;
+    top: 0.5em;
+    width: 3em;
+    height: 3em;
+}
+.about-description {
+    text-align: right;
+}
+.about-location {
+    display: block;
+}
+
 .about-contacts {
     margin: 2em 0 1em;
     text-align: right;
     font-style: normal;
 }
+
+.content-links {
+    position: absolute;
+    left: -6em;
+    top: 0;
+}
+    .content-links li {
+        list-style: none;
+        background: white;
+    }
+    .content-links li:hover {
+        background: #ccc;
+    }
+    .content-links a {
+        display: block;
+        padding: 0.5em;
+    }
 
 .back-to-main {
     height: 3em;
